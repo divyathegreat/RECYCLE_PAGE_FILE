@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Steps for Organic Waste Recycling</title>
+        <style>
+            body {
+                font-family: 'Verdana', Geneva, Tahoma, sans-serif;
+                background-color: rgba(221, 235, 24, 0.966);
+                margin: 2%;
+                padding: 0;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+            }
+            .content {
+                background: white;
+                padding: 20px;
+                border-radius: 10px;
+                box-shadow: 0 0 10px rgba(0,0,0,0.1);
+                max-width: 600px;
+                text-align: justify;
+            }
+            h1 {
+                color: #333;
+                cursor: pointer;
+                transition: color 0.3s;
+            }
+            h1:hover {
+                color: #007BFF;
+            }
+            .custom-bullets {
+                list-style-type: none;
+                padding: 0;
+            }
+            .custom-bullets li {
+                margin: 10px 0;
+                display: none;
+                background: #007BFF;
+                color: white;
+                padding: 10px;
+                border-radius: 5px;
+                transition: transform 0.3s;
+            }
+            .custom-bullets li.visible {
+                display: block;
+                transform: scale(1.1);
+            }
+            .progress-bar {
+                width: 100%;
+                background: #ddd;
+                border-radius: 5px;
+                overflow: hidden;
+                margin-top: 10px;
+            }
+            .progress-bar div {
+                height: 20px;
+                width: 0;
+                background: #007BFF;
+                transition: width 0.3s;
+            }
+            .upload-container {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+h2 {
+    margin-bottom: 20px;
+}
+
+input[type="file"] {
+    display: block;
+    margin: 0 auto 20px;
+}
+
+button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+        </style>
+    </head>
+    <body>
+        <div class="content">
+            <h1>Steps of Recycling Organic Waste: Step-By-Step</h1>
+            <div class="progress-bar"><div id="progress"></div></div>
+            <div class="steps">
+                <ul class="custom-bullets">
+                    <h1 onclick="toggleStep('step1')"><b><u>Step 1</u></b></h1>
+                    <li id="step1">Gather your organic waste, such as fruit and vegetable scraps, coffee grounds, eggshells, and yard trimmings. Avoid meat, dairy, and oily foods as they can attract pests.</li>
+                </ul>
+                <ul class="custom-bullets">
+                    <h1 onclick="toggleStep('step2')"><b><u>Step 2</u></b></h1>
+                    <li id="step2"><b>Backyard Composting</b>: Create a compost pile or use a compost bin in your backyard.
+                    <b>Vermicomposting</b>: Use worms to break down organic waste in a controlled environment. This is great for small spaces.
+                    <b>Indoor Composting</b>:Use a composting bin or bokashi system for indoor composting.</li>
+                </ul>
+                <ul class="custom-bullets">
+                    <h1 onclick="toggleStep('step3')"><b><u>Step 3</u></b></h1>
+                    <li id="step3">In your compost bin, alternate between green materials (e.g., vegetable scraps, grass clippings) and brown materials (e.g., dried leaves, paper). This helps balance carbon and nitrogen, which are essential for composting.</li>
+                </ul>
+                <ul class="custom-bullets">
+                    <h1 onclick="toggleStep('step4')"><b><u>Step 4</u></b></h1>
+                    <li id="step4">Turn your compost pile regularly to aerate it. This helps speed up the decomposition process and prevents unpleasant odors.</li>
+                </ul>
+                <ul class="custom-bullets">
+                    <h1 onclick="toggleStep('step5')"><b><u>Step 5</u></b></h1>
+                    <li id="step5">Keep the compost pile moist, but not too wet. Think of it as a damp sponge. Water it occasionally if it gets too dry.</li>
+                </ul>
+                <ul class="custom-bullets">
+                    <h1 onclick="toggleStep('step6')"><b><u>Step 6</u></b></h1>
+                    <li id="step6">Over time, microorganisms will break down the organic waste into compost. This can take anywhere from a few months to a year, depending on the method and conditions.</li>
+                </ul>
+                <ul class="custom-bullets">
+                    <h1 onclick="toggleStep('step7')"><b><u>Step 7</u></b></h1>
+                    <li id="step7">Use your compost to enrich soil in your garden or share it with neighbors and community gardens.</li>
+                </ul>
+            </div>
+            <div class="upload-container">
+                <h2>Upload Your Video</h2>
+                <form id="videoUploadForm">
+                    <input type="file" id="videoUpload" accept="video/*" required>
+                    <button type="submit" id="submitButton">Submit</button>
+                </form>
+            </div>
+        </div>
+        <script>
+            function toggleStep(step) {
+                var element = document.getElementById(step);
+                if (element.classList.contains("visible")) {
+                    element.classList.remove("visible");
+                } else {
+                    element.classList.add("visible");
+                }
+                updateProgress();
+            }
+            function updateProgress() {
+                var steps = document.querySelectorAll('.custom-bullets li');
+                var visibleSteps = document.querySelectorAll('.custom-bullets li.visible');
+                var progress = (visibleSteps.length / steps.length) * 100;
+                document.getElementById('progress').style.width = progress + '%';
+            }
+            // Initialize steps as hidden
+            document.addEventListener('DOMContentLoaded', (event) => {
+                document.querySelectorAll('.custom-bullets li').forEach((item) => {
+                    item.classList.remove('visible');
+                });
+                updateProgress();
+            });
+            document.getElementById('videoUploadForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+    const videoFile = document.getElementById('videoUpload').files[0];
+    if (videoFile) {
+        alert('Video uploaded successfully!');
+        // You can add further processing here, like uploading the video to a server
+    } else {
+        alert('Please select a video file to upload.');
+    }
+});
+        </script>
+    </body>
+</html>
